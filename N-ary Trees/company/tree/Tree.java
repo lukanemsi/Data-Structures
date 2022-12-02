@@ -1,4 +1,4 @@
-package tree;
+package company.tree;
 import java.util.Stack;
 
 
@@ -19,6 +19,7 @@ public class Tree<T> {
             return current;
         return current.getChildren().stream().map(c->findT(c, value)).filter(value::equals).findFirst().orElse(null);
     }
+	
     public void insert(T value, T parent) {
         if (findT(value) != null)
             return;
@@ -82,6 +83,17 @@ public class Tree<T> {
 
         return (int)( parentsA.stream().takeWhile(x -> !x.equals(closest)).count()
                 +parentsB.stream().takeWhile(x -> !x.equals(closest)).count());
+    }
+	
+	 public List<T> toList()
+    {
+        return toList(root,new LinkedList<T>());
+    }
+    private List<T> toList(Node<T> current,List<T> list)
+    {
+        list.add(current.getData());
+        current.getChildren().forEach(c -> toList(c,list));
+        return list;
     }
 
     public Node<T> getRoot() {
