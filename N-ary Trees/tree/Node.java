@@ -21,7 +21,7 @@ public class Node<T>{
     }
 
     public boolean isLeaf() {
-        return children.stream().noneMatch(Objects::nonNull);
+        return children.isEmpty();
     }
 
     public int size()
@@ -73,6 +73,6 @@ public class Node<T>{
 
     @Override
     public int hashCode() {
-        return Objects.hash(children, parent, data);
+        return data.hashCode();
     }
 }
